@@ -1,0 +1,38 @@
+#### http://linuxconfig.org/how-to-open-http-port-80-on-redhat-7-linux-using-firewall-cmd
+
+
+How to open http port 80 on Redhat 7 Linux using firewall-cmd
+By default the port 80 for http connection is filtered on Redhat 7 as you can only access this port from the actual localhost and not from any other public host. To open a port 80 on RHEL 7 Linux we need to add an iptables rule. For this RHEL7 uses firewall-cmd. First add your port 80 rule with a following command:
+
+[root@rhel7 ~]# firewall-cmd --zone=public --add-port=80/tcp --permanent
+
+Once you add the above firewall rule reload firewall service:
+
+[root@rhel7 ~]# firewall-cmd --reload
+
+And check whether the port was added to ipatables rules:
+
+[root@rhel7 ~]# iptables-save | grep 80
+-A IN_public_allow -p tcp -m tcp --dport 80 -m conntrack --ctstate NEW -j ACCEPT
+
+Open http port 80 firewall rule on RHEL7 linux httpd
+If you decide to block/remove http port 80 firewall rule you can again use the firewall-cmd command:
+
+[root@rhel7 ~]# iptables-save | grep 80
+-A IN_public_allow -p tcp -m tcp --dport 80 -m conntrack --ctstate NEW -j ACCEPT
+[root@rhel7 ~]# firewall-cmd --zone=public --remove-port=80/tcp --permanent
+success
+[root@rhel7 ~]# firewall-cmd --reload
+success
+[root@rhel7 ~]# iptables-save | grep 80
+[root@rhel7 ~]# 
+
+Block/Remove http port 80 firewall rule on RHEL7 linux httpd
+
+
+
+iptables -A INPUT -m mac --mac-source 00:26:B9:F5:85:A4 -p tcp --dport ssh -j ACCEPT
+
+iptables -A INPUT -m mac --mac-source 00:26:B9:F5:85:A4 -p tcp --dport ssh -j DROP
+
+iptables -A INPUT -m mac --mac-source 00:0F:EA:91:04:08 -j DROP
