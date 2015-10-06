@@ -1,0 +1,50 @@
+#### https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s2-ssh-configuration-keypairs.html
+
+Ważne w tym przypadku są odpowiednie uprawnienia do plików .ssh i auth_keys - sam RH nie krzyczy (jak w przypadku Ubuntu), że uprawnienia są zbyt wysokie.
+
+ Change the permissions of the ~/.ssh/ directory:
+
+~]$ chmod 700 ~/.ssh
+
+Copy the content of ~/.ssh/id_rsa.pub into the ~/.ssh/authorized_keys on the machine to which you want to connect, appending it to its end if the file already exists.
+Change the permissions of the ~/.ssh/authorized_keys file using the following command:
+
+
+[paka@localhost ~]$ ls -lah
+razem 24K
+drwx------. 3 paka paka 4,0K 10-05 09:38 .
+drwxr-xr-x. 5 root root   40 09-30 15:20 ..
+-rw-------. 1 paka paka 1,6K 10-05 16:57 .bash_history
+-rw-r--r--. 1 paka paka   18 2015-01-11  .bash_logout
+-rw-r--r--. 1 paka paka  193 2015-01-11  .bash_profile
+-rw-r--r--. 1 paka paka  231 2015-01-11  .bashrc
+-rw-------. 1 paka paka   51 10-05 13:11 .lesshst
+drwx------. 2 paka paka   76 10-05 09:46 .ssh
+
+[paka@localhost ~]$ ls -lah
+razem 24K
+drwx------. 3 paka paka 4,0K 10-05 09:38 .
+drwxr-xr-x. 5 root root   40 09-30 15:20 ..
+-rw-------. 1 paka paka 1,6K 10-05 16:57 .bash_history
+-rw-r--r--. 1 paka paka   18 2015-01-11  .bash_logout
+-rw-r--r--. 1 paka paka  193 2015-01-11  .bash_profile
+-rw-r--r--. 1 paka paka  231 2015-01-11  .bashrc
+-rw-------. 1 paka paka   51 10-05 13:11 .lesshst
+drwx------. 2 paka paka   76 10-05 09:46 .ssh
+
+
+
+[paka@localhost .ssh]$ ll
+razem 16
+-rw-rw-r--. 1 paka paka  403 10-05 09:46 authorized_keys <----- ###
+-rw-------. 1 paka paka 1679 10-05 09:42 id_rsa
+-rw-r--r--. 1 paka paka  408 10-05 09:42 id_rsa.pub
+-rw-r--r--. 1 paka paka  171 10-01 09:05 known_hosts
+
+
+[paka@localhost .ssh]$ ll
+razem 16
+-rw-------. 1 paka paka  403 10-05 09:46 authorized_keys  <----- ###
+-rw-------. 1 paka paka 1679 10-05 09:42 id_rsa
+-rw-r--r--. 1 paka paka  408 10-05 09:42 id_rsa.pub
+-rw-r--r--. 1 paka paka  171 10-01 09:05 known_hosts
