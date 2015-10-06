@@ -36,3 +36,5 @@ iptables -A INPUT -m mac --mac-source 00:26:B9:F5:85:A4 -p tcp --dport ssh -j AC
 iptables -A INPUT -m mac --mac-source 00:26:B9:F5:85:A4 -p tcp --dport ssh -j DROP
 
 iptables -A INPUT -m mac --mac-source 00:0F:EA:91:04:08 -j DROP
+
+okrutniak
